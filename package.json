@@ -1,0 +1,37 @@
+{
+  "name": "camunda-connector-test-harness",
+  "version": "1.0.0",
+  "description": "TypeScript harness for contract-testing Camunda outbound connectors with secret replacement, retry simulation, and failure review.",
+  "private": true,
+  "type": "module",
+  "main": "dist/app.js",
+  "scripts": {
+    "dev": "tsx watch src/app.ts",
+    "build": "tsc --pretty false",
+    "test": "vitest run",
+    "demo": "tsx scripts/run_demo.ts",
+    "smoke": "tsx scripts/smoke_check.ts",
+    "render:assets": "powershell -ExecutionPolicy Bypass -File .\\scripts\\render_readme_assets.ps1"
+  },
+  "keywords": [
+    "camunda",
+    "connector-testing",
+    "workflow-automation",
+    "typescript",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/node": "^25.8.0",
+    "@types/supertest": "^7.2.0",
+    "supertest": "^7.2.2",
+    "tsx": "^4.22.0",
+    "typescript": "^6.0.3",
+    "vitest": "^4.1.6"
+  }
+}

@@ -49,6 +49,18 @@ function metricCard(label: string, value: string, detail: string): string {
   `;
 }
 
+function featureCard(title: string, detail: string, accent: string): string {
+  return `
+    <article class="panel feature-card">
+      <div class="feature-mark ${accent}"></div>
+      <div>
+        <h3>${escapeHtml(title)}</h3>
+        <p>${escapeHtml(detail)}</p>
+      </div>
+    </article>
+  `;
+}
+
 function signalList(values: string[]): string {
   return `<div class="signal-row">${values
     .map((value) => `<span class="signal">${escapeHtml(value)}</span>`)
@@ -191,6 +203,24 @@ export function page(active: string, body: string): string {
       .hero { margin-top: 20px; padding: 30px; border-radius: 30px; }
       .panel { border-radius: 26px; }
       .section, .metric { padding: 24px; }
+      .feature-card {
+        padding: 22px;
+        display: grid;
+        grid-template-columns: 48px 1fr;
+        gap: 16px;
+        align-items: start;
+      }
+      .feature-mark {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.08);
+        box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+      }
+      .feature-mark.blue { background: linear-gradient(135deg, rgba(31,111,255,0.22), rgba(91,157,255,0.08)); }
+      .feature-mark.teal { background: linear-gradient(135deg, rgba(30,211,198,0.22), rgba(30,211,198,0.08)); }
+      .feature-mark.rose { background: linear-gradient(135deg, rgba(251,113,133,0.22), rgba(251,113,133,0.08)); }
       .eyebrow {
         color: #8fc9ff; font-size: 11px; font-weight: 800; letter-spacing: 0.22em; text-transform: uppercase;
       }
@@ -219,9 +249,96 @@ export function page(active: string, body: string): string {
         display: block; color: var(--camunda-amber); margin-bottom: 8px;
         font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
       }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.35fr 0.95fr;
+        gap: 20px;
+        align-items: stretch;
+      }
+      .hero-visual {
+        padding: 24px;
+        border-radius: 26px;
+        border: 1px solid var(--line);
+        background:
+          radial-gradient(circle at top right, rgba(31,111,255,0.16), transparent 34%),
+          linear-gradient(180deg, rgba(20,28,52,0.98), rgba(11,16,32,0.98));
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .trace-rail {
+        position: relative;
+        min-height: 220px;
+        border-radius: 22px;
+        border: 1px solid rgba(255,255,255,0.06);
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+          radial-gradient(circle at center, rgba(30,211,198,0.08), transparent 46%);
+        overflow: hidden;
+      }
+      .trace-node {
+        position: absolute;
+        width: 110px;
+        padding: 12px 10px;
+        border-radius: 16px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: rgba(10,16,32,0.86);
+        text-align: center;
+      }
+      .trace-node strong {
+        display: block;
+        font-size: 11px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .trace-node span {
+        display: block;
+        margin-top: 6px;
+        color: var(--muted);
+        font-size: 10px;
+      }
+      .trace-node.source { top: 22px; left: 24px; }
+      .trace-node.engine { top: 90px; left: calc(50% - 55px); }
+      .trace-node.target { top: 22px; right: 24px; }
+      .trace-node.audit { bottom: 22px; left: calc(50% - 55px); }
+      .trace-line {
+        position: absolute;
+        background: linear-gradient(90deg, rgba(31,111,255,0.18), rgba(30,211,198,0.35), rgba(31,111,255,0.18));
+        box-shadow: 0 0 18px rgba(91,157,255,0.2);
+      }
+      .trace-line.h-left { top: 76px; left: 128px; width: calc(50% - 160px); height: 2px; }
+      .trace-line.h-right { top: 76px; right: 128px; width: calc(50% - 160px); height: 2px; }
+      .trace-line.v-mid { top: 134px; left: calc(50% - 1px); width: 2px; height: 54px; }
+      .hero-kpis {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+      }
+      .hero-kpi {
+        padding: 14px;
+        border-radius: 18px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid rgba(255,255,255,0.06);
+      }
+      .hero-kpi span {
+        display: block;
+        color: #92a9cf;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+      .hero-kpi strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 28px;
+        letter-spacing: -0.04em;
+      }
       .grid { display: grid; gap: 18px; margin-top: 20px; }
       .grid-four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
       .grid-two { grid-template-columns: 1fr 1fr; }
+      .grid-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
       .metric .label { color: #92a9cf; font-size: 10px; font-weight: 800; letter-spacing: 0.18em; text-transform: uppercase; }
       .metric .value { margin-top: 12px; font-size: 44px; font-weight: 900; letter-spacing: -0.04em; }
       .signal-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
@@ -254,8 +371,12 @@ export function page(active: string, body: string): string {
         margin-top: 18px; color: #9eb0ca; font-size: 12px;
         display: flex; justify-content: space-between; gap: 12px;
       }
-      @media (max-width: 1180px) { .grid-four, .grid-two { grid-template-columns: 1fr 1fr; } }
-      @media (max-width: 860px) { .grid-four, .grid-two { grid-template-columns: 1fr; } .topbar { display: block; } }
+      @media (max-width: 1180px) { .grid-four, .grid-two, .grid-three, .hero-grid { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 860px) {
+        .grid-four, .grid-two, .grid-three, .hero-grid { grid-template-columns: 1fr; }
+        .topbar { display: block; }
+        .hero-kpis { grid-template-columns: 1fr; }
+      }
     </style>
   </head>
   <body>
@@ -284,13 +405,42 @@ export function overview(service: HarnessService): string {
   const summary = service.summary();
   return `
     <section class="hero">
-      <div class="eyebrow">Camunda connector harness</div>
-      <h1>Exercise outbound connectors before secret posture, retries, and variable mappings go sideways.</h1>
-      <p>Use this repo to model scenario validation, required-input checks, secret replacement, and failure behavior for Camunda-style outbound connectors.</p>
-      <div class="callout">
-        <strong>Lead recommendation</strong>
-        <span>${escapeHtml(summary.leadRecommendation)}</span>
+      <div class="hero-grid">
+        <div>
+          <div class="eyebrow">Camunda connector harness</div>
+          <h1>Exercise outbound connectors before secret posture, retries, and variable mappings go sideways.</h1>
+          <p>Use this repo to model scenario validation, required-input checks, secret replacement, and failure behavior for Camunda-style outbound connectors.</p>
+          <div class="callout">
+            <strong>Lead recommendation</strong>
+            <span>${escapeHtml(summary.leadRecommendation)}</span>
+          </div>
+        </div>
+        <aside class="hero-visual">
+          <div>
+            <div class="eyebrow">Execution trace</div>
+            <h2>Validate the connector lane before the worker ever mutates a downstream system.</h2>
+          </div>
+          <div class="trace-rail">
+            <div class="trace-line h-left"></div>
+            <div class="trace-line h-right"></div>
+            <div class="trace-line v-mid"></div>
+            <div class="trace-node source"><strong>Inputs</strong><span>BPMN vars</span></div>
+            <div class="trace-node engine"><strong>Harness</strong><span>validate + mask</span></div>
+            <div class="trace-node target"><strong>Connector</strong><span>dispatch gate</span></div>
+            <div class="trace-node audit"><strong>Replay</strong><span>retry + explain</span></div>
+          </div>
+          <div class="hero-kpis">
+            <div class="hero-kpi"><span>Ready</span><strong>${summary.readyScenarios}</strong></div>
+            <div class="hero-kpi"><span>Secret checks</span><strong>${summary.secretReplacementChecks}</strong></div>
+            <div class="hero-kpi"><span>Failure sims</span><strong>${summary.failureSimulations}</strong></div>
+          </div>
+        </aside>
       </div>
+    </section>
+    <section class="grid grid-three">
+      ${featureCard("Secret Masking", "Replace connector secrets through explicit placeholders instead of unsafe fallback values.", "teal")}
+      ${featureCard("Retry Discipline", "Keep transport retries separate from validation failures and privileged-review paths.", "blue")}
+      ${featureCard("Failure Replay", "Show why a connector retried, halted, or escalated with one readable control surface.", "rose")}
     </section>
     <section class="grid grid-four">
       ${metricCard("Scenario count", String(summary.scenarioCount), "Modeled connector test scenarios in the harness.")}
@@ -322,6 +472,11 @@ export function scenarioMatrix(service: HarnessService): string {
       <h1>See exactly what each connector scenario validates before the worker sends anything downstream.</h1>
       <p>The matrix keeps required inputs, auth posture, execution mode, and expected connector outcomes visible for each modeled test lane.</p>
     </section>
+    <section class="grid grid-three">
+      ${featureCard("Dry-run Ready", "Safe connector cases that should pass schema and dispatch checks without privileged review.", "blue")}
+      ${featureCard("Manual Review", "Connector cases that should stop at the approval lane before secrets or access changes go live.", "teal")}
+      ${featureCard("Fail-fast", "Malformed inputs and unsafe auth posture should stop immediately, not burn retries.", "rose")}
+    </section>
     <section class="grid">
       <article class="panel section">
         <div class="eyebrow">Connector scenarios</div>
@@ -339,6 +494,11 @@ export function secretReplacement(service: HarnessService): string {
       <div class="eyebrow">Secret replacement</div>
       <h1>Credential handling should fail clearly, not quietly fall back to unsafe defaults.</h1>
       <p>This route tracks whether each connector scenario resolves its secret placeholders through a real source or drifts toward static fallback behavior.</p>
+    </section>
+    <section class="grid grid-three">
+      ${featureCard("Placeholder-only refs", "Keep connector config tied to replacement keys instead of embedding credentials in worker input.", "blue")}
+      ${featureCard("Vault-aware review", "Make cert rotation and secret-source posture visible before a scenario is marked safe.", "teal")}
+      ${featureCard("Critical fallback kill-switch", "Hard-coded fallback tokens should surface as red-lane harness failures.", "rose")}
     </section>
     <section class="grid grid-two">
       <article class="panel section">
@@ -389,6 +549,11 @@ export function verification(service: HarnessService): string {
       <div class="eyebrow">Verification</div>
       <h1>What the harness proves about connector safety, secret discipline, and failure replay right now.</h1>
       <p>The current snapshot shows whether the connector lane is validating required inputs, handling secrets safely, and separating retryable problems from fail-fast conditions.</p>
+    </section>
+    <section class="grid grid-three">
+      ${featureCard("Contract quality", "Prove that required variables and payload shape are validated before connector dispatch.", "blue")}
+      ${featureCard("Secret posture", "Keep replacement source clarity and fallback behavior visible in the same review lane.", "teal")}
+      ${featureCard("Replay safety", "Explain why a scenario retried, halted, or escalated after a failure simulation.", "rose")}
     </section>
     <section class="grid grid-four">
       ${metricCard("Mapped scenarios", String(service.scenarios().length), "Connector lanes already modeled in the harness.")}

@@ -44,7 +44,7 @@ Outbound connector demos usually prove one happy path and stop there. Real conne
 ## Run locally
 
 ```powershell
-Set-Location "C:\Users\chaus\dev\repos\camunda-connector-test-harness"
+cd camunda-connector-test-harness
 npm install
 npm run dev
 ```

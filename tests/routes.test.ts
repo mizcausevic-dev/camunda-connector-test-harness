@@ -7,7 +7,9 @@ describe("route surfaces", () => {
     const response = await request(createApp()).get("/");
 
     expect(response.status).toBe(200);
-    expect(response.text).toContain("Exercise outbound connectors before secret posture, retries, and variable mappings go sideways.");
+    expect(response.text).toContain("Exercise outbound connectors before secret posture, retries, and variable mappings go");
+    expect(response.text).toContain("sideways.");
+    expect(response.text).toContain("Camunda Connector Test Harness");
   });
 
   it("returns the summary payload", async () => {

@@ -2,6 +2,24 @@
 
 All notable changes to `camunda-connector-test-harness` are documented in this file.
 
+## [1.1.0] - 2026-05-28
+
+### Changed
+
+- **Visual overhaul of every HTML route.** Pulled in the Gemini-built reference design: Instrument Serif headlines with italic accent words, JetBrains Mono labels with leading colored dots, brighter Camunda-blue brand with subtle glow, inline SVG icons (no external icon runtime), terminal-style endpoint code blocks, depth via gradients + grid backdrop, and a brighter execution-trace diagram on the overview.
+- Status pills now carry leading per-status SVG icons (ready check, review circle-tick, watch arc, critical triangle) instead of color-only differentiation.
+- Scenario rows now render the operation name in Camunda-blue monospace, the endpoint inside a styled code block, and the auth/required-input as mono chips.
+- Added OG / Twitter / theme-color meta on every route for share-card rendering on LinkedIn / Slack / Mastodon.
+- Route titles now include the lane name (e.g. `Scenario Matrix · Camunda Connector Test Harness`).
+
+### Captured
+
+- All four README screenshots re-rendered against the new design (`scripts/render_readme_assets.ps1`).
+
+### Preserved
+
+- All routes, JSON APIs, business logic, data shapes, and tests. No `src/services/harnessService.ts` or `src/data` edits — the visual change is rendering-only.
+
 ## [1.0.0] - 2026-05-15
 
 ### Added
